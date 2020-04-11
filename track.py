@@ -2,14 +2,23 @@ import mongo
 import scrap
 import time
 import mail
+from email_validator import validate_email, EmailNotValidError
 
-URL = "https://www.amazon.com/Daily-Face-Cover-Pack-10/dp/B086QLB6SK/ref=sr_1_1?dchild=1&keywords=masks&qid=1586575883&sr=8-1&th=1"
-escapelimit=1000
-mailid=input("enter the mailid : ")
+URL = "https://www.amazon.in/Himalaya-Pure-Hands-Purifying-Tulsi/dp/B0828XSF6L/ref=sr_1_2?dchild=1&keywords=sanitizer+spray+for+hand&qid=1586586172&sr=8-2"
+
 def myurl():
     return URL
 
 def run():
+    escapelimit=int(input("Enter the amount to alert : "))
+    mailid=input("enter the mailid : ")
+
+    try:
+        v = validate_email(mailid) 
+        mailid = v["email"] 
+    except EmailNotValidError as e:
+        print(str(e))
+        
     data = scrap.getProdDetails(URL)
     result = ""
     if data is None:
