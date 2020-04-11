@@ -52,6 +52,18 @@ def getCurrency(cost):
     #print(price.currency)
     return price.currency
 
+def getTitle(data):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.92 Safari/537.36"
+    }
+    url = getURL(data)
+    if url is not None:
+        page = requests.get(url, headers=headers)
+        soup = BeautifulSoup(page.content, "html5lib")
+        title = soup.find(id="productTitle")
+        return title.get_text().strip()
+    else:
+        return None
 
 def getProdDetails(data):
 
