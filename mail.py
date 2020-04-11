@@ -1,8 +1,8 @@
 import datetime
 import smtplib
 
-def sendMail(URL,price,Title):
-
+def send_mail(URL,price,Title,mailid):
+    
   server = smtplib.SMTP('smtp.gmail.com', 587)
   server.ehlo()
   server.starttls()
@@ -17,7 +17,7 @@ def sendMail(URL,price,Title):
   
   server.sendmail(
     'cruxpunch@gmail.com',
-    'harisaipravin@gmail.com',
+    mailid,
     msg
   )
 
