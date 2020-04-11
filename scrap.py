@@ -1,5 +1,6 @@
 
 from bs4 import BeautifulSoup
+from price_parser import Price
 import requests
 
 def getURL(data):
@@ -39,3 +40,14 @@ def getExt(data):
     #print(ext)
     
     return ext
+        
+def getPrice(cost):
+
+    price = Price.fromstring(cost)
+    #print(price.amount_float)
+    return price.amount_float
+
+def getCurrency(cost):
+    price = Price.fromstring(cost)
+    #print(price.currency)
+    return price.currency
