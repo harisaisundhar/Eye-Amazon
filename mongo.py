@@ -2,7 +2,7 @@ import datetime
 import pymongo
 import scrap
 
-client = pymongo.MongoClient("mongodb+srv://amazon:tracker@scrapbook-iydc2.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("<connection string>")
 db = client.Amz
 
 def pushData(details,URL):

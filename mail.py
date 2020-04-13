@@ -8,7 +8,7 @@ def send_mail(URL,price,Title,mailid):
   server.starttls()
   server.ehlo()
 
-  server.login('cruxpunch@gmail.com', 'live4Evr')
+  server.login('<gmail_id>', '<gmail_pass>')
 
   subject = 'Eyedropper alert'
   body = "Price of "+Title+" fell below your expected value of "+str(price)+"\n\n"+"click here : "+URL
@@ -16,7 +16,7 @@ def send_mail(URL,price,Title,mailid):
   msg = f"Subject: {subject}\n\n{body}"
   
   server.sendmail(
-    'cruxpunch@gmail.com',
+    '<gmail_id>',
     mailid,
     msg
   )
