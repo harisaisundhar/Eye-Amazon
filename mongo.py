@@ -6,11 +6,9 @@ import os
 
 load_dotenv()
 
-client = pymongo.MongoClient(os.getenv("MONGO_STRING"))
-db = client.Amz
-
 def pushData(details,URL):
-    
+    client = pymongo.MongoClient(os.getenv("MONGO_STRING"))
+    db = client.Amz
     ext=scrap.getExt(URL)
     
     new = db[ext]

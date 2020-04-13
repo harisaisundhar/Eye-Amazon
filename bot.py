@@ -1,24 +1,26 @@
+import track
 import logging
 import os
 import random
 import sys
-import track
-
+from dotenv import load_dotenv
 from telegram.ext import Updater, CommandHandler
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO,
                     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
 
-mode = os.getenv("prod")
-TOKEN = os.getenv("<TOKEN>")
+mode = os.getenv("MODE")
+TOKEN = os.getenv("TOKEN")
 if mode == "dev":
     def run(updater):
         updater.start_polling()
 elif mode == "prod":
     def run(updater):
         PORT = int(os.environ.get("PORT", "8443"))
-        HEROKU_APP_NAME = os.environ.get("<HEROKU_APP_NAME>")
+        HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
         # Code from https://github.com/python-telegram-bot/python-telegram-bot/wiki/Webhooks#heroku
         updater.start_webhook(listen="0.0.0.0",
                               port=PORT,
@@ -31,19 +33,38 @@ else:
 
 def start_handler(bot, update):
     logger.info("User {} started bot".format(update.effective_user["id"]))
-    update.message.reply_text("Hello from Python!\nPress /random to get random number")
+    update.message.reply_text("Hello from Eye-Amazon!\nType /track <URL> to start tracking")
 
 
-def track_handler(bot, update):
-    logger.info("User {} Tracking bot".format(update.effective_user["id"]))
-    update.message.reply_text("telgram bot in development")
+def tracker_handler(bot, update):
+    # Creating a handler-function for /track command
+    string=update["message"]["text"].replace("/track ", "")
+    dta=track.tracker(string)
+    logger.info("{}".format(dta["Result"]))
+    update.message.reply_text("Output: {}".format(dta["Result"]))
+    update.message.reply_text("Title: {}\nCost: {} {}".format(dta["Title"],dta["Curr"],dta["Cost"]))
 
+def limit_handler(bot, update):
+    # Creating a handler-function for /track command
+    string=update["message"]["text"].replace("/limit ", "")
+    track.setEscape(int(string))
+    logger.info("Limit channged")
+    update.message.reply_text("Limit changed to: {}".format(string))
+
+def mail_handler(bot, update):
+    # Creating a handler-function for /track command
+    string=update["message"]["text"].replace("/mail ", "")
+    track.setEscape(string)
+    logger.info("Mail channged")
+    update.message.reply_text("Limit changed to: {}".format(string))
 
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN)
 
     updater.dispatcher.add_handler(CommandHandler("start", start_handler))
-    updater.dispatcher.add_handler(CommandHandler("track", track_handler))
-
+    updater.dispatcher.add_handler(CommandHandler("track", tracker_handler))
+    updater.dispatcher.add_handler(CommandHandler("Track", tracker_handler))
+    updater.dispatcher.add_handler(CommandHandler("limit", limit_handler))
+    updater.dispatcher.add_handler(CommandHandler("mail", mail_handler))
     run(updater)
