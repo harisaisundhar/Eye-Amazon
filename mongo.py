@@ -1,8 +1,12 @@
 import datetime
 import pymongo
 import scrap
+from dotenv import load_dotenv
+import os
 
-client = pymongo.MongoClient("<connection string>")
+load_dotenv()
+
+client = pymongo.MongoClient(os.getenv("MONGO_STRING"))
 db = client.Amz
 
 def pushData(details,URL):

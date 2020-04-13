@@ -1,5 +1,8 @@
 import datetime
 import smtplib
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 def send_mail(URL,price,Title,mailid):
     
@@ -8,7 +11,7 @@ def send_mail(URL,price,Title,mailid):
   server.starttls()
   server.ehlo()
 
-  server.login('<gmail_id>', '<gmail_pass>')
+  server.login(os.getenv("MAIL_ID"),os.getenv("PASS"))
 
   subject = 'Eyedropper alert'
   body = "Price of "+Title+" fell below your expected value of "+str(price)+"\n\n"+"click here : "+URL
@@ -16,7 +19,7 @@ def send_mail(URL,price,Title,mailid):
   msg = f"Subject: {subject}\n\n{body}"
   
   server.sendmail(
-    '<gmail_id>',
+    os.getenv("MAIL_ID"),
     mailid,
     msg
   )

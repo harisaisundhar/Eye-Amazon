@@ -95,5 +95,4 @@ def getProdDetails(data):
             details["Url"] = url
         else:
             details = None
-    print(details)
-    #return details
+    return details

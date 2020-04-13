@@ -4,3 +4,4 @@ html5lib==1.0.1
 requests==2.22.0
 price-parser==0.3.3
 pyotp==2.3.0
+python-dotenv==0.12.0
