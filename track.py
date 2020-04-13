@@ -4,7 +4,7 @@ import time
 import mail
 from email_validator import validate_email, EmailNotValidError
 
-URL = "https://www.amazon.in/Himalaya-Pure-Hands-Purifying-Tulsi/dp/B0828XSF6L/ref=sr_1_2?dchild=1&keywords=sanitizer+spray+for+hand&qid=1586586172&sr=8-2"
+URL = "https://www.amazon.in/Amazon-Brand-Solimo-Activated-Charcoal/dp/B07W4WSY1R?ref_=Oct_MWishedForC_1374295031_0&pf_rd_r=27XEPK5SKGH9Y0T48VYY&pf_rd_p=88aa8f1d-3713-510e-a108-29e72fb545b8&pf_rd_s=merchandised-search-8&pf_rd_t=101&pf_rd_i=1374295031&pf_rd_m=A1VBAL9TL5WCBF"
 
 def myurl():
     return URL
