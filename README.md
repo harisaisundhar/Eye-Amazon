@@ -75,6 +75,13 @@ $ heroku logs --tail --app <HEROKU_APP_NAME>
 ```
 - Want to contribute? Great! Looking forward for your updates and creativity !
 
+### Development
+
+- To run in local change the mode to dev in .env file and use the given snippet:
+```sh
+$ MODE=dev; TOKEN= <TOKEN_ID>; python bot.py
+```
+
 ### Todos
 
  - Add SMS Feature
