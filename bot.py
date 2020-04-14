@@ -58,6 +58,14 @@ def mail_handler(bot, update):
     logger.info("Mail channged")
     update.message.reply_text("Limit changed to: {}".format(string))
 
+def graph_handler(bot, update):
+    # Creating a handler-function for /track command
+    string=update["message"]["text"].replace("/graph ", "")
+    track.graphh(string)
+    datum="done"
+    logger.info("Graph Analysis done")
+    update.message.reply_text("Graph Analysis: {}".format(datum))
+
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN)
@@ -65,6 +73,7 @@ if __name__ == '__main__':
     updater.dispatcher.add_handler(CommandHandler("start", start_handler))
     updater.dispatcher.add_handler(CommandHandler("track", tracker_handler))
     updater.dispatcher.add_handler(CommandHandler("Track", tracker_handler))
+    updater.dispatcher.add_handler(CommandHandler("graph", graph_handler))
     updater.dispatcher.add_handler(CommandHandler("limit", limit_handler))
     updater.dispatcher.add_handler(CommandHandler("mail", mail_handler))
     run(updater)

@@ -13,9 +13,11 @@ def setURL(url):
     URL=url
 
 def setEscape(lim):
+    global escapelimit
     escapelimit=lim
 
 def setMail(ids):
+    global mailid
     try:
         v = validate_email(ids) 
         ids = v["email"] 
@@ -25,6 +27,10 @@ def setMail(ids):
 
 def myurl():
     return URL
+
+def graphh(url):
+    setURL(url)
+    mongo.getHistory(URL)
 
 def run():
     details = {"Title":"",

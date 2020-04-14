@@ -23,12 +23,34 @@ def getURL(data):
         short = data[coun:length]
         fi = short.find("/")
         url = "https://" + short[:fi] + temp
-        #print(url)
     
     else:
         url = None
     
     return url
+
+def getAsin(data):
+    coun = data.find("www.amazon.")
+    length = len(data)
+    if coun != -1:
+        ins = data.find("/dp/")
+        if ins != -1:
+            ine = ins + 14
+            temp = data[ins+4:ine]
+        else:
+            ins = data.find("/gp/")
+            if ins != -1:
+                ine = ins + 22
+                temp = data[ins+4:ine]
+            else:
+                return None
+            
+        print(temp)
+    
+    else:
+        temp = None
+    
+    return temp
         
 def getExt(data):
     
